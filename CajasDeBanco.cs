@@ -6,8 +6,8 @@ do{
     Console.WriteLine("------------------------Banco CDIS:------------------------");
     Console.WriteLine("1. Ingresar la cantidad de retiros hechos por los usuarios.");
     Console.WriteLine("2. Revisar la cantidad entregada de billetes y monedas.");
-    Console.WriteLine("3. Salir del programa.");
-    Console.WriteLine("Ingresa la opción");
+    Console.WriteLine("3. Salir del programa.\n");
+    Console.WriteLine("Ingresa la opción:");
     op = Console.ReadKey().KeyChar;
     switch (op){
         case '1':
@@ -50,12 +50,12 @@ void ingresarRetiros(int[] retiros, ref int cantidadRetiros){
     for(int i = 0; i < cantidadRetiros; i++){
         op = '0';
         do{
-            Console.WriteLine($"Ingresa la cantidad del retiro #{i+1}:");
+            Console.WriteLine($"\nIngresa la cantidad del retiro #{i+1}:");
             if(int.TryParse(Console.ReadLine(), out retiros[i]))
                 if(retiros[i] > 0 && retiros[i] <= 50000)
                     op = '1';
             if(op == '0'){
-                Console.WriteLine("La cantidad del retiro es inválida, intenta con otra cantidad.");
+                Console.WriteLine("\nLa cantidad del retiro es inválida, intenta con otra cantidad.");
                 Console.WriteLine("Presiona 'enter' para continuar ...");
                 while(Console.ReadKey().Key != ConsoleKey.Enter){}
             }
