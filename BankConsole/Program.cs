@@ -1,35 +1,56 @@
 ﻿using BankConsole;
 using System.Text.RegularExpressions;
 
+char option;
+
+Console.Clear();
+Console.WriteLine("Quieres recibir un correo con la lista de todos los usuarios registrados? (S/s = Si, N/n = No): ");
+option = Console.ReadKey().KeyChar;
+if(option == 's' || option == 'S'){
+    EmailService.SendMail();
+    Console.WriteLine("Se ha enviado un correo con la lista de todos los usuarios registrados.");
+    Console.WriteLine("Presiona 'enter' para salir del programa...");
+    while(Console.ReadKey().Key != ConsoleKey.Enter){}
+}
+else
+    ShowMenu();
+
+/*
 if(args.Length != 0)
     EmailService.SendMail();
 else
     ShowMenu();
+*/
 
 void ShowMenu(){
-    Console.Clear();
-    Console.WriteLine("Selecciona una opcion:");
-    Console.WriteLine("1 - Crear un Usuario nuevo.");
-    Console.WriteLine("2 - Eliminar un Usuario existente.");
-    Console.WriteLine("3 - Salir.");
 
-    int option;
     do{
-        string input = Console.ReadLine();
+        Console.Clear();
+        Console.WriteLine("Selecciona una opción:");
+        Console.WriteLine("1 - Crear un Usuario nuevo.");
+        Console.WriteLine("2 - Eliminar un Usuario existente.");
+        Console.WriteLine("3 - Salir.\n");
 
-        if(!int.TryParse(input, out option))
-            Console.WriteLine("Debes ingresar un número (1, 2 o 3).");
-        else if (option > 3)
-            Console.WriteLine("Debes ingresar un número valido (1, 2 o 3).");
-    }while(option == 0 || option > 3);
-    switch(option){
-        case 1: CreateUser();
-                break;
-        case 2: DeleteUser();
-                break;
-        case 3: Environment.Exit(0);
-                break;
+        Console.WriteLine("Opción: ");
+        option = Console.ReadKey().KeyChar;
+
+        switch(option){
+        case '1': CreateUser();
+                  break;
+        case '2': DeleteUser();
+                  break;
+        case '3': option = '0';
+                  Console.Clear();
+                  Environment.Exit(0);
+                  break;
+        default: option = '1';
+                 Console.Clear();
+                 Console.WriteLine("Ingresa una opción válida.");
+                 Console.WriteLine("Presiona 'enter' para volver al menu...");
+                 while(Console.ReadKey().Key != ConsoleKey.Enter){}
+                 break;
     }
+    }while(option != '0');
 }
 
 void CreateUser(){
@@ -115,7 +136,6 @@ void CreateUser(){
     Console.WriteLine("Usuario creado.");
     Console.WriteLine("Presiona 'enter' para volver al menu...");
     while(Console.ReadKey().Key != ConsoleKey.Enter){}
-    ShowMenu();
 }
 
 void DeleteUser(){
@@ -160,7 +180,6 @@ void DeleteUser(){
                 while(Console.ReadKey().Key != ConsoleKey.Enter){}
             }
         }while(opcion == 0);
-    ShowMenu();
 }
 
 /*
