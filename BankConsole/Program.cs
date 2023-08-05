@@ -8,6 +8,7 @@ Console.WriteLine("Quieres recibir un correo con la lista de todos los usuarios 
 option = Console.ReadKey().KeyChar;
 if(option == 's' || option == 'S'){
     EmailService.SendMail();
+    Console.Clear();
     Console.WriteLine("Se ha enviado un correo con la lista de todos los usuarios registrados.");
     Console.WriteLine("Presiona 'enter' para salir del programa...");
     while(Console.ReadKey().Key != ConsoleKey.Enter){}

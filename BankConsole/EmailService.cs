@@ -17,18 +17,22 @@ public static class EmailService{
 
         string filePath = Storage.GetFilePath();
 
-        var attachment = new MimePart(){
-            Content = new MimeContent (File.OpenRead (filePath)),
-            ContentDisposition = new ContentDisposition (ContentDisposition.Attachment),
-            ContentTransferEncoding = ContentEncoding.Base64,
-            FileName = Path.GetFileName (filePath)
-        };
+        if(File.Exists(filePath)){
 
-        var multipart = new Multipart ("mixed");
-        multipart.Add (message.Body);
-        multipart.Add (attachment);
+            var attachment = new MimePart(){
+                Content = new MimeContent (File.OpenRead (filePath)),
+                ContentDisposition = new ContentDisposition (ContentDisposition.Attachment),
+                ContentTransferEncoding = ContentEncoding.Base64,
+                FileName = Path.GetFileName (filePath)
+            };
 
-        message.Body = multipart;
+            var multipart = new Multipart ("mixed");
+            multipart.Add (message.Body);
+            multipart.Add (attachment);
+
+            message.Body = multipart;
+        }
+        
 
         using (var client = new SmtpClient()){
             client.Connect("smtp.gmail.com", 587, false);
