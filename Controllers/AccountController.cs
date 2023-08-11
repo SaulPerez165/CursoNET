@@ -24,7 +24,7 @@ public class AccountController : ControllerBase
     }
 
     [HttpGet("getall")]
-    public async Task<IEnumerable<AccountDtoOut>> Get()
+    public async Task<IEnumerable<AccountDtoOut>> GetAll()
     {
         return await accountService.GetAll();
     }

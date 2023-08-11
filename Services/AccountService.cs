@@ -47,11 +47,12 @@ public class AccountService
     public async Task<Account> Create(AccountDtoIn newAccountDtoIn)
     {
 
-        var newAccount = new Account();
-
-        newAccount.AccountType = newAccountDtoIn.AccountType;
-        newAccount.ClientId = newAccountDtoIn.ClientId;
-        newAccount.Balance = newAccountDtoIn.Balance;
+        var newAccount = new Account
+        {
+            AccountType = newAccountDtoIn.AccountType,
+            ClientId = newAccountDtoIn.ClientId,
+            Balance = newAccountDtoIn.Balance
+        };
 
         _context.Accounts.Add(newAccount);
         await _context.SaveChangesAsync();
