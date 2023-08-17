@@ -18,9 +18,11 @@ public partial class Client
 
     [MaxLength(50, ErrorMessage = "El email debe ser menor a 50 caracteres.")]
     [EmailAddress(ErrorMessage = "El formato de correo es incorrecto.")]
-    public string? Email { get; set; }
+    public string Email { get; set; } = null!;
 
     public DateTime RegDate { get; set; }
+
+    public string Pwd { get; set; } = null!;
 
     [JsonIgnore]
     public virtual ICollection<Account> Accounts { get; set; } = new List<Account>();

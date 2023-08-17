@@ -88,7 +88,7 @@ public partial class BankContext : DbContext
                 .HasMaxLength(40)
                 .IsUnicode(false);
             entity.Property(e => e.Pwd)
-                .HasMaxLength(50)
+                .HasMaxLength(200)
                 .IsUnicode(false);
             entity.Property(e => e.RegDate)
                 .HasDefaultValueSql("(getdate())")
@@ -110,7 +110,6 @@ public partial class BankContext : DbContext
 
             entity.HasOne(d => d.Account).WithMany(p => p.BankTransactions)
                 .HasForeignKey(d => d.AccountId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__BankTrans__Accou__571DF1D5");
 
             entity.HasOne(d => d.TransactionTypeNavigation).WithMany(p => p.BankTransactions)
@@ -138,6 +137,9 @@ public partial class BankContext : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.PhoneNumber)
                 .HasMaxLength(40)
+                .IsUnicode(false);
+            entity.Property(e => e.Pwd)
+                .HasMaxLength(200)
                 .IsUnicode(false);
             entity.Property(e => e.RegDate)
                 .HasDefaultValueSql("(getdate())")

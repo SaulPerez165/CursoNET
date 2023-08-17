@@ -39,7 +39,7 @@ public class AccountService
             }).SingleOrDefaultAsync();
     }
 
-    public async Task<Account?> GetById(int id)
+    public async Task<Account?> GetById(int? id)
     {
         return await _context.Accounts.FindAsync(id);
     }
